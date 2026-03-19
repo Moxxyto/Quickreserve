@@ -121,3 +121,16 @@ app.delete("/citas/:id", async (req, res) => {
 app.listen(3000, () => {
   console.log("Servidor corriendo en http://localhost:3000");
 });
+
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Quickreserve Backend 🔥</h1>
+    <p>Todo funcionando con MongoDB!</p>
+    <p>Rutas disponibles:</p>
+    <ul>
+      <li>/api/reservas</li>
+      <li>/api/usuarios</li>
+      <!-- agrega aquí las que tengas -->
+    </ul>
+  `);
+});
