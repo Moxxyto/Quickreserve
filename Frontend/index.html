@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickReserve</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  
+  <h2>Reserve Aqui!</h2>
+  
+
+  <input type="text" id="nombre" placeholder="Tu nombre">
+  <input type="date" id="fecha">
+  <input type="time" id="hora">
+<button onclick="reservar()">Reservar</button>
+<br><br>
+<button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<div class="lista" id="listaCitas">
+  <h3>Reservas</h3>
+</div>
+
+<script src="app.js"></script>
+
+
+</body>
+</html>
