@@ -2,7 +2,7 @@ async function login() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  let res = await fetch("http://localhost:3000/login", {
+  let res = await fetch("https://quickreserve-back.onrender.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

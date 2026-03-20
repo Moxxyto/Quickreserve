@@ -14,7 +14,7 @@ async function registrar() {
     return;
   }
 
-  let res = await fetch("http://localhost:3000/registro", {
+  let res = await fetch("https://quickreserve-back.onrender.com/registro", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
