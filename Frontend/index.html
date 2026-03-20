@@ -8,16 +8,17 @@
 <body>
 
 <div class="container">
-  
-  <h2>Reserve Aqui!</h2>
-  
+  <h1>QuickReserve 🔥</h1>
+  <p>Gestiona tus citas fácilmente</p>
 
-  <input type="text" id="nombre" placeholder="Tu nombre">
+  <h2>Agendar Cita</h2>
+
+  <input type="text" id="nombre" placeholder="Nombre del cliente">
   <input type="date" id="fecha">
   <input type="time" id="hora">
-<button onclick="reservar()">Reservar</button>
-<br><br>
-<button onclick="logout()">Cerrar sesión</button>
+
+  <button onclick="reservar()">Reservar</button>
+  <button onclick="logout()">Cerrar sesión</button>
 </div>
 
 <div class="lista" id="listaCitas">
@@ -25,7 +26,7 @@
 </div>
 
 <script src="app.js"></script>
-
-
+<div class="watermark">FerrerasCode © 2026</div>
+<div id="toast"></div>
 </body>
 </html>

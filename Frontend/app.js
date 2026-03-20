@@ -5,52 +5,79 @@ if (!usuario) {
   window.location.href = "login.html";
 }
 
+// 🔔 TOAST
+function mostrarMensaje(msg, tipo = "ok") {
+  let toast = document.getElementById("toast");
+  toast.innerText = msg;
+
+  toast.className = "show";
+  if (tipo === "error") toast.classList.add("error");
+
+  setTimeout(() => {
+    toast.className = "";
+  }, 3000);
+}
 
 // 📌 GUARDAR CITA
 async function reservar() {
-  let nombre = document.getElementById("nombre").value;
+  let nombre = document.getElementById("nombre").value.trim();
   let fecha = document.getElementById("fecha").value;
   let hora = document.getElementById("hora").value;
+  let boton = document.querySelector("button");
 
-  // ✅ VALIDACIÓN
   if (!nombre || !fecha || !hora) {
-    alert("Completa todos los campos ⚠️");
+    mostrarMensaje("Completa todos los campos ⚠️", "error");
     return;
   }
 
-  let cita = {
-    nombre,
-    fecha,
-    hora,
-    usuarioId: usuario._id.toString()
-  };
+  let hoy = new Date().toISOString().split("T")[0];
+  if (fecha < hoy) {
+    mostrarMensaje("Fecha inválida ❌", "error");
+    return;
+  }
 
-  await fetch("http://localhost:3000/citas", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(cita)
-  });
+  boton.disabled = true;
+  boton.innerText = "Guardando...";
 
-  alert("Cita guardada 🔥");
+  try {
+    await fetch("https://quickreserve-back.onrender.com/citas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nombre,
+        fecha,
+        hora,
+        usuarioId: usuario._id
+      })
+    });
 
-  // limpiar inputs
-  document.getElementById("nombre").value = "";
-  document.getElementById("fecha").value = "";
-  document.getElementById("hora").value = "";
+    mostrarMensaje("Cita guardada ✅");
 
-  cargarCitas();
+    document.getElementById("nombre").value = "";
+    document.getElementById("fecha").value = "";
+    document.getElementById("hora").value = "";
+
+    cargarCitas();
+
+  } catch (error) {
+    mostrarMensaje("Error al guardar ❌", "error");
+  }
+
+  boton.disabled = false;
+  boton.innerText = "Reservar";
 }
-
 
 // 📥 CARGAR CITAS
 async function cargarCitas() {
-  let res = await fetch("http://localhost:3000/citas/" + usuario._id);
+  let res = await fetch("https://quickreserve-back.onrender.com/citas/" + usuario._id);
   let citas = await res.json();
 
   let lista = document.getElementById("listaCitas");
-  lista.innerHTML = "<h3>Reservas</h3>";
+  lista.innerHTML = "<h3>Tus citas</h3>";
+
+  citas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
   citas.forEach(cita => {
     lista.innerHTML += `
@@ -62,25 +89,23 @@ async function cargarCitas() {
   });
 }
 
-
-// ❌ ELIMINAR CITA
+// ❌ ELIMINAR
 async function eliminarCita(id) {
-  await fetch("http://localhost:3000/citas/" + id, {
+  if (!confirm("¿Eliminar esta cita?")) return;
+
+  await fetch("https://quickreserve-back.onrender.com/citas/" + id, {
     method: "DELETE"
   });
 
-  alert("Cita eliminada");
-
+  mostrarMensaje("Cita eliminada");
   cargarCitas();
 }
-
 
 // 🔓 LOGOUT
 function logout() {
   localStorage.removeItem("usuario");
   window.location.href = "login.html";
 }
-
 
 // 🚀 INICIAR
 cargarCitas();

@@ -1,127 +1,177 @@
-/* Importar tipografía moderna e iconos */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    background: #0f172a;
-    /* Fondo con gradiente dinámico */
-    background: radial-gradient(circle at top right, #1e293b, #0f172a);
-    color: white;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    position: relative;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column; /* 🔥 CLAVE */
+  align-items: center;
 }
 
-/* MARCA DE AGUA FerrerasCode */
-body::before {
-    content: "Ferrer4sC</>de";
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.03); /* Súper sutil */
-    transform: rotate(-15deg);
-    pointer-events: none;
-    z-index: 0;
-}
-
+/* CONTENEDOR PRINCIPAL */
 .container {
-    background: rgba(30, 41, 59, 0.45);
-    backdrop-filter: blur(12px); /* Efecto Glassmorphism */
-    -webkit-backdrop-filter: blur(12px);
-    padding: 40px;
-    border-radius: 28px;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+  max-width: 380px;
+  margin: 80px auto;
+  background: rgba(30, 41, 59, 0.9);
+  padding: 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  text-align: center;
+
+  /* animación */
+  animation: fadeIn 0.8s ease;
+}
+
+/* TITULOS */
+h1 {
+  margin-bottom: 5px;
 }
 
 h2 {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-    background: linear-gradient(to right, #4ade80, #3b82f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
+  margin-bottom: 15px;
+  color: #38bdf8;
 }
 
-/* Inputs con estilo premium */
+/* INPUTS */
 input {
-    width: 100%;
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 14px 18px;
-    border-radius: 16px;
-    color: white;
-    margin-top: 15px;
-    font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #0f172a;
+  color: white;
+  transition: 0.3s;
 }
 
+/* EFECTO INPUT */
 input:focus {
-    outline: none;
-    border-color: #22c55e;
-    background: rgba(15, 23, 42, 0.8);
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 10px #38bdf8;
+  transform: scale(1.02);
 }
 
-/* Botón llamativo con animación */
+/* BOTONES */
 button {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
-    font-weight: 700;
-    padding: 16px;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 25px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
-}
-
-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.4);
-    filter: brightness(1.1);
-}
-
-/* Lista de citas */
-.lista {
-    width: 100%;
-    max-width: 400px;
-    margin-top: 50px;
-}
-a {
-  color: #22c55e;
-  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER BOTON */
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(34,197,94,0.6);
+}
+
+/* BOTON ELIMINAR */
+button.delete {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  margin-top: 8px;
+}
+
+button.delete:hover {
+  box-shadow: 0 0 15px rgba(239,68,68,0.6);
+}
+
+/* LISTA */
+.lista {
+  max-width: 380px;
+  margin: 30px auto;
+  animation: fadeIn 1s ease;
+}
+
+/* TARJETAS DE CITAS */
+.cita {
+  background: rgba(30, 41, 59, 0.9);
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 12px;
+  transition: 0.3s;
+  animation: slideUp 0.5s ease;
+}
+
+/* HOVER CITA */
+.cita:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* LINKS */
+a {
+  color: #38bdf8;
+  text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-button.delete {
-  background: #ef4444;
+/* ANIMACIONES */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-button.delete:hover {
-  background: #dc2626;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.1;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #38bdf8;
+  pointer-events: none;
+}
+
+/* TOAST NOTIFICATION */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #22c55e;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#toast.error {
+  background: #ef4444;
 }

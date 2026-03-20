@@ -7,18 +7,47 @@
 </head>
 <body>
 
-<h2>Registro</h2>
+<div class="container">
+  <h2>Crear Cuenta</h2>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
+  <input type="email" id="email" placeholder="Correo electrónico">
+  <input type="password" id="password" placeholder="Contraseña">
 
-<button onclick="registrar()">Crear cuenta</button>
-<p style="text-align:center; margin-top:10px;">
-  ¿Ya tienes cuenta? 
-  <a href="login.html">Inicia sesión</a>
-</p>
+  <button onclick="registrar()">Registrarse</button>
 
-<script src="registro.js"></script>
+  <p style="margin-top: 10px;">
+    ¿Ya tienes cuenta? 
+    <a href="login.html">Inicia sesión</a>
+  </p>
+</div>
+
+<script>
+async function registrar() {
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("Completa todos los campos ⚠️");
+    return;
+  }
+
+  let res = await fetch("http://localhost:3000/registro", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  let data = await res.json();
+
+  alert(data.mensaje);
+
+  if (data.usuario || data.mensaje.includes("creado")) {
+    window.location.href = "login.html";
+  }
+}
+</script>
 
 </body>
 </html>
