@@ -23,27 +23,40 @@
 
 <script>
 async function registrar() {
-  let email = document.getElementById("email").value.trim();
-  let password = document.getElementById("password").value.trim();
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
 
+  // VALIDACIÓN
   if (!email || !password) {
     alert("Completa todos los campos ⚠️");
     return;
   }
-fetch("https://quickreserve-back.onrender.com/registro", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
 
-  let data = await res.json();
+  if (!email.includes("@")) {
+    alert("Correo inválido ⚠️");
+    return;
+  }
 
-  alert(data.mensaje);
+  try {
+    let res = await fetch("https://quickreserve-back.onrender.com/registro", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-  if (data.usuario || data.mensaje.includes("creado")) {
-    window.location.href = "login.html";
+    let data = await res.json();
+
+    alert(data.mensaje);
+
+    if (data.usuario || data.mensaje === "Usuario creado 🔥") {
+      window.location.href = "login.html";
+    }
+
+  } catch (error) {
+    alert("Error de conexión ❌");
+    console.error(error);
   }
 }
 </script>
